@@ -121,4 +121,6 @@ Both modes were verified on the physical Basys 3 FPGA.
 
 ## Project Status
 
+## Project Status
+
 The processor successfully completes its demonstration program in behavioral simulation and has been synthesized and programmed onto a Basys 3 FPGA. The physical implementation supports switch-selectable hexadecimal and decimal display modes using SW15.
