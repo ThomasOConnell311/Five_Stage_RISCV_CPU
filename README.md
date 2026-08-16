@@ -2,7 +2,7 @@
 
 A 32-bit, five-stage pipelined RISC-V processor implemented in SystemVerilog and tested using AMD/Xilinx Vivado. The design includes pipeline forwarding, hazard detection, load-use stalling, branch handling, separate instruction and data memories, and a Basys 3 FPGA top-level interface.
 
-# Features
+## Features
 
 - 32-bit RISC-V datapath
 - Five pipeline stages:
@@ -18,8 +18,9 @@ A 32-bit, five-stage pipelined RISC-V processor implemented in SystemVerilog and
 - Separate instruction and data memories
 - Self-checking SystemVerilog testbench
 - Basys 3 FPGA wrapper and seven-segment display driver
+- SW15-selectable hexadecimal and decimal output on the Basys 3 four-digit seven-segment display
 
-# Instruction Support
+## Instruction Support
 
 The processor implements a project-specific subset of the RV32I instruction set, including:
 
@@ -32,7 +33,7 @@ The processor implements a project-specific subset of the RV32I instruction set,
 
 This project is intended as an educational processor implementation rather than a fully RV32I-compliant commercial core.
 
-# Pipeline Architecture
+## Pipeline Architecture
 
 | Stage | Function |
 |---|---|
@@ -44,7 +45,7 @@ This project is intended as an educational processor implementation rather than 
 
 The forwarding unit resolves many data dependencies by selecting results from later pipeline stages. The hazard unit detects load-use dependencies and stalls the pipeline when forwarding alone cannot resolve the dependency.
 
-# Main RTL Modules
+## Main RTL Modules
 
 | Module | Purpose |
 |---|---|
@@ -61,10 +62,10 @@ The forwarding unit resolves many data dependencies by selecting results from la
 | `data_mem.sv` | Data memory |
 | `riscv_defs.sv` | Shared processor definitions |
 | `basys3_top.sv` | Basys 3 FPGA top-level wrapper |
-| `seven_seg_driver.sv` | Seven-segment display controller |
+| `seven_seg_driver.sv` | Multiplexed four-digit display with hexadecimal and decimal formatting |
 | `tb_riscv_pipeline_cpu.sv` | Behavioral simulation testbench |
 
-# Verification
+## Verification
 
 The processor was verified with a SystemVerilog testbench in Vivado XSim. The test program exercises arithmetic operations, data dependencies, memory access, forwarding, and pipeline control.
 
@@ -82,7 +83,16 @@ PASS: pipelined CPU demo program worked.
 
 The self-checking testbench reports a failure if the final architectural state does not match the expected result.
 
-# Vivado Configuration
+## FPGA Display Modes
+
+The Basys 3 four-digit seven-segment display supports two output formats selected using switch SW15:
+
+- Hexadecimal mode displays the four hexadecimal digits of the selected value.
+- Decimal mode converts the value into individual decimal digits using division by 10 and modulo 10 operations.
+
+Both modes were verified on the physical Basys 3 FPGA.
+
+## Vivado Configuration
 
 - Design top module: `basys3_top`
 - Simulation top module: `tb_riscv_pipeline_cpu`
@@ -91,7 +101,7 @@ The self-checking testbench reports a failure if the final architectural state d
 - HDL: SystemVerilog
 - Simulator: Vivado XSim
 
-# Running the Simulation
+## Running the Simulation
 
 1. Clone or download this repository.
 2. Open `riscv_cpu.xpr` in Vivado.
@@ -100,7 +110,7 @@ The self-checking testbench reports a failure if the final architectural state d
 5. Run the simulation for at least 425 ns.
 6. Check the Tcl Console for the register values and the PASS message.
 
-# Building for the Basys 3
+## Building for the Basys 3
 
 1. Open `riscv_cpu.xpr`.
 2. Confirm that `basys3_top` is selected as the design top.
@@ -109,6 +119,6 @@ The self-checking testbench reports a failure if the final architectural state d
 5. Generate the bitstream.
 6. Connect the Basys 3 and program it through Vivado Hardware Manager.
 
-# Project Status
+## Project Status
 
-The processor successfully completes its demonstration program in behavioral simulation and has been synthesized and programmed onto a Basys 3 FPGA.
+The processor successfully completes its demonstration program in behavioral simulation and has been synthesized and programmed onto a Basys 3 FPGA. The physical implementation supports switch-selectable hexadecimal and decimal display modes using SW15.
