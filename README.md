@@ -2,7 +2,7 @@
 
 A 32-bit, five-stage pipelined RISC-V processor implemented in SystemVerilog and tested using AMD/Xilinx Vivado. The design includes pipeline forwarding, hazard detection, load-use stalling, branch handling, separate instruction and data memories, and a Basys 3 FPGA top-level interface.
 
-# Features
+## Features
 
 - 32-bit RISC-V datapath
 - Five pipeline stages:
@@ -19,7 +19,7 @@ A 32-bit, five-stage pipelined RISC-V processor implemented in SystemVerilog and
 - Self-checking SystemVerilog testbench
 - Basys 3 FPGA wrapper and seven-segment display driver
 
-# Instruction Support
+## Instruction Support
 
 The processor implements a project-specific subset of the RV32I instruction set, including:
 
